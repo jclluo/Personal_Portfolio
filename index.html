@@ -12,7 +12,7 @@
 
 </head>
 <body>
-  
+    <!-- NAV -->
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand top-left-name" href="#">Chris Luo</a>
     
@@ -41,100 +41,223 @@
             </ul>
         </div>
     
-        <!-- CV link on the right -->
         <a class="nav-link position-absolute end-0" href="CV.pdf" style="right: 10px;">CV</a>
     </nav>
     
+    <!-- <div class="background-title" id="bg-about">About Me</div> -->
+    
+
+    <!-- Intro -->
     <section id="about" class="container mt-5">
-        <h1 id="greeting" class="text-center"></h1> 
+        <h1 id="greeting" class="text-center blinking-cursor"></h1> 
 
     </section>
 
+
+    <!-- My Works -->
+    <!-- <div class="background-title" id="bg-myworks">My Works</div> -->
     <section id="myworks" class="container mt-5">
-        <h2>My Works</h2>
+
         <div class="container mt-5">
+            <!-- First Row -->
             <div class="row">
-                <div class="col-md-3 img-thumbnail-container">
-                    <img src="images/Console War.png" class="img-fluid img-thumbnail" alt="Console War">
+                <div class="col-md-6 work-image">
+                    <img src="images/Console War.png" class="img-fluid" alt="Console War" data-toggle="modal" data-target="#imageModal" data-link="https://galnnt.github.io/history-of-gaming-consoles/">
                 </div>
-                <div class="col-md-3 img-thumbnail-container">
-                    <img src="images/EZreal.png" class="img-fluid img-thumbnail" alt="EZreal">
+                <div class="col-md-6 work-description">
+                    <p>A svelt based interacctive website depicting the evolution of gaming conosles</p>
                 </div>
-                <div class="col-md-3 img-thumbnail-container">
-                    <img src="images/Rift Mystery.png" class="img-fluid img-thumbnail" alt="Rift Mystery">
+            </div>
+            <!-- Second Row -->
+            <div class="row">
+                <div class="col-md-6 work-description ">
+                    <p>Description of EZreal's impact on winning in League of Legend professional scene
+                    </p>
                 </div>
-                <div class="col-md-3 img-thumbnail-container">
-                    <img src="images/Wheelchair.png" class="img-fluid img-thumbnail" alt="Wheelchair">
+                <div class="col-md-6 work-image">
+                    <img src="images/EZreal.png" class="img-fluid" alt="EZreal" data-toggle="modal" data-target="#imageModal" data-link="https://jclluo.github.io/LoL_Ezreal_Eff2023/">
+                </div>
+            </div>
+            <!-- Repeat for each pair -->
+            <div class="row">
+                <div class="col-md-6 work-image">
+                    <img src="images/Rift Mystery.png" class="img-fluid" alt="Rift Mystery" data-toggle="modal" data-target="#imageModal" data-link="https://jclluo.github.io/Esports-DragonSoul-Analysis/">
+                </div>
+                <div class="col-md-6 work-description">
+                    <p>A analysis and machine learning model for picking the most crucial elements that leads to victory in League of Legend.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 work-description">
+                    <p>An interactive map of bus stations in San Diego including filters for accessibilities options and organizations</p>
+                </div>
+                <div class="col-md-6 work-image">
+                    <img src="images/Wheelchair.png" class="img-fluid" alt="Wheelchair" data-toggle="modal" data-target="#imageModal" data-link="https://galnnt.github.io/sd-transport-visual/">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 work-image">
+                    <img src="images/Todo.png" class="img-fluid" alt="Todo List Application" data-toggle="modal" data-target="#imageModal" data-link="https://github.com/jclluo/To_DO_List">
+                </div>
+                <div class="col-md-6 work-description">
+                    <p>A project based interactive TO-DO list with interactive chart.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 work-description">
+                    <p>An interactive map showing the daily activity of bike stations in Boston.</p>
+                </div>
+                <div class="col-md-6 work-image">
+                    <img src="images/bike.png" class="img-fluid" alt="Bicycle" data-toggle="modal" data-target="#imageModal" data-link="https://example.com/console-war">
                 </div>
             </div>
         </div>
-        
-        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    
+        <!-- Modal -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true" >
             <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="imageModalLabel"></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel"></h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="" id="modalImage" class="img-fluid" alt="Detailed View">
+                        <a href="#" id="imageLink" class="fa-brands fa-github" target="_blank">View More</a>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <img src="" id="modalImage" class="img-fluid" alt="Detailed View">
-                </div>
-              </div>
-            </div>
-          </div>
-    </section>
-
-    <section id="experience" class="container mt-5">
-        <h2>Experience</h2>
-        <p>Detail your professional experience, roles you've had, and key accomplishments. This might include jobs, internships, freelance projects, etc.</p>
-    </section>
-
-    <section id="education" class="container mt-5">
-        <h2>Education</h2>
-        <p>Outline your educational background including the schools you've attended, degrees earned, and any special qualifications or certifications.</p>
-    </section>
-
-    <section id="skills" class="container mt-5">
-        <h2>Skills</h2>
-        <p>Highlight specific skills you possess, such as programming languages, software proficiency, technical skills, and other abilities relevant to your field.</p>
-    </section>
-
-    <div class="container">  
-        <div class="row">
-            <div class="col-md-4">
-                <img src="images/Console War.png" class="img-fluid" alt="Dice 1">
-            </div>
-            <div class="col-md-4">
-                <img src="images/EZreal.png" class="img-fluid" alt="Dice 2">
-            </div>
-            <div class="col-md-4">
-                <img src="images/Rift Mystery.png" class="img-fluid" alt="Dice 3">
             </div>
         </div>
-        <div class="row">
+    </section>
+    
+
+    <!-- Experience-->
+    <!-- <div class="background-title" id="bg-experience">Experience</div> -->
+
+    <section id="experience" class="container mt-5 ">
+        <h2 class="experience_title">Main coder for the UC San Diego Economics Research lab.</h2>
+        
+        <div class="row text-center">
             <div class="col-md-4">
-                <img src="images/Wheelchair.png" class="img-fluid" alt="Dice 4">
+                <img src="path_to_your_image1.jpg" class="img-fluid highlight-img" alt="Highlight 1">
+                <p class="highlight-desc">Description of Highlight 1</p>
             </div>
             <div class="col-md-4">
-                <img src="images/dice5.png" class="img-fluid" alt="Dice 5">
+                <img src="path_to_your_image2.jpg" class="img-fluid highlight-img" alt="Highlight 2">
+                <p class="highlight-desc">Description of Highlight 2</p>
             </div>
             <div class="col-md-4">
-                <img src="images/dice6.png" class="img-fluid" alt="Dice 6">
+                <img src="path_to_your_image3.jpg" class="img-fluid highlight-img" alt="Highlight 3">
+                <p class="highlight-desc">Description of Highlight 3</p>
             </div>
         </div>
-    </div>
+    </section>
     
 
 
 
+    <!-- Education -->
+    <!-- <div class="background-title" id="bg-education">Education</div> -->
+
+    <section id="education" class="container mt-5">
+        <h2 class="text-center mb-4 education_title">Education</h2>
+        <div>
+            <h3>Bachelor of Science in Mathematics and Economics with high distinction</h3>
+            <p>University of California San Diego, 2021-2025</p>
+            <ul>
+                <li>Coursework included economics applications, econometrics, mathematical models, and statistics.</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Minor Degree in Data Science</h3>
+            <p>University of California San Diego, 2021-2025</p>
+            <ul>
+                <li>Coursework included data analysis, data structure, machine learning, and coding with various languages (Python, Java, etc.)</li>
+            </ul>
+        </div>
+    </section>
+    
 
 
+    <!-- Skills -->
+    <!-- <div class="background-title" id="bg-skills">Skills</div> -->
+
+    <section id="skills" class="container mt-5">
+        <h2>Skills</h2>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <span class="skill-rating">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                </span> Python
+            </li>
+            <li class="list-group-item">
+                <span class="skill-rating">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                </span> Java
+            </li>
+            <li class="list-group-item">
+                <span class="skill-rating">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                </span> Data Analysis
+            </li>
+            <!-- New skills -->
+            <li class="list-group-item">
+                <span class="skill-rating">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                </span> Data Visualization
+            </li>
+            <li class="list-group-item">
+                <span class="skill-rating">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                </span> Machine Learning
+            </li>
+            <li class="list-group-item">
+                <span class="skill-rating">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                </span> R-Studio
+            </li>
+            <li class="list-group-item">
+                <span class="skill-rating">
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                </span> Excel
+            </li>
+        </ul>
+        
+    </section>
+    
+
+
+
+    <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="index.js" charset="utf-8"></script>
+  <script src="https://kit.fontawesome.com/30f228d396.js" crossorigin="anonymous"></script>
+  <script src="script.js" charset="utf-8"></script>
 </body>
 
 </html>
