@@ -69,3 +69,17 @@ function typeGreeting() {
 }
 
 document.addEventListener('DOMContentLoaded', typeGreeting);
+
+
+
+
+document.querySelectorAll('.img-thumbnail').forEach(item => {
+    item.addEventListener('click', event => {
+        const src = item.getAttribute('src');
+        const modalImage = document.getElementById('modalImage');
+        modalImage.src = src; // Set the source for the modal image
+        $('#imageModal').modal('show'); // Show the modal
+    });
+});
+
+

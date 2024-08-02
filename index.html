@@ -42,17 +42,48 @@
         </div>
     
         <!-- CV link on the right -->
-        <a class="nav-link position-absolute end-0" href="#contact" style="right: 10px;">CV</a>
+        <a class="nav-link position-absolute end-0" href="CV.pdf" style="right: 10px;">CV</a>
     </nav>
     
     <section id="about" class="container mt-5">
-        <h1 id="greeting"></h1> 
+        <h1 id="greeting" class="text-center"></h1> 
 
     </section>
 
     <section id="myworks" class="container mt-5">
         <h2>My Works</h2>
-        <p>Here, you can showcase your portfolio of projects or any professional work you've done. This could be presented in a gallery format, links to live sites, or a carousel of images.</p>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-3 img-thumbnail-container">
+                    <img src="images/Console War.png" class="img-fluid img-thumbnail" alt="Console War">
+                </div>
+                <div class="col-md-3 img-thumbnail-container">
+                    <img src="images/EZreal.png" class="img-fluid img-thumbnail" alt="EZreal">
+                </div>
+                <div class="col-md-3 img-thumbnail-container">
+                    <img src="images/Rift Mystery.png" class="img-fluid img-thumbnail" alt="Rift Mystery">
+                </div>
+                <div class="col-md-3 img-thumbnail-container">
+                    <img src="images/Wheelchair.png" class="img-fluid img-thumbnail" alt="Wheelchair">
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="imageModalLabel"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img src="" id="modalImage" class="img-fluid" alt="Detailed View">
+                </div>
+              </div>
+            </div>
+          </div>
     </section>
 
     <section id="experience" class="container mt-5">

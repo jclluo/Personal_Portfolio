@@ -30,16 +30,10 @@ h1, h2, h3 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.footer {
-  background-color: var(--soft-beige);
-  color: var(--deep-purple);
-  padding: 10px 0;
-  text-align: center;
-}
 
 body {
   /* Define a linear gradient background from purple to white */
-  background: linear-gradient(to bottom, #987D9A, #FFFFFF); /* Starting with your deep purple to white */
+  background: linear-gradient(to bottom, #987D9A, #ccbdc9); /* Starting with your deep purple to white */
   color: #333; /* Sets the default text color */
   font-family: Arial, sans-serif; /* Example font */
   min-height: 100vh; /* Ensures the gradient covers the full view height */
@@ -47,7 +41,9 @@ body {
   padding: 0; /* Removes default padding */
 }
 
-
+h2{
+  color: #FEFBD8;
+}
 
 
 .navbar .navbar-brand.top-left-name {
@@ -72,6 +68,53 @@ body {
   display: inline-block; /* Keeps the cursor aligned with the text */
 }
 
+html, body {
+  height: 100%; /* Ensure full height coverage */
+  width: 100%; /* Cover full width to avoid any horizontal scrolling */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+/* Updated styles for the About Me section */
+#about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  width: 100%;
+}
+
+#greeting {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 20px;
+  animation: slideUp 1.5s ease-out forwards; /* Apply the animation */
+}
+
+/* Thumbnail container styling */
+.img-thumbnail-container {
+  height: 200px;  /* Fixed height for all image containers */
+  width: 100%;   /* Full width of the column */
+  overflow: hidden;  /* Hides parts of the image that overflow the container */
+}
+
+/* Image styling to maintain aspect ratio and cover the container */
+.img-thumbnail {
+  height: 100%;  /* Make image fill the container height */
+  width: auto;  /* Auto-adjust the width to maintain aspect ratio */
+  min-width: 100%;  /* Ensure the image covers the width */
+  object-fit: cover;  /* Cover the container maintaining aspect ratio without distortion */
+  transition: transform 0.5s ease;  /* Smooth transition for any transformations */
+  cursor: pointer;  /* Indicates the image can be interacted with */
+}
+
+.img-thumbnail:hover {
+  transform: scale(1.1); /* Scales up the image slightly on hover */
+}
+
+
 /* Blinking animation */
 @keyframes blink {
   50% {
@@ -92,3 +135,13 @@ body {
   }
 }
 
+@keyframes slideUp {
+  from {
+      transform: translateY(20%); /* Start from below the final position */
+      opacity: 0; /* Start with the text being transparent */
+  }
+  to {
+      transform: translateY(0); /* Move to the final position */
+      opacity: 1; /* Fully visible */
+  }
+}
