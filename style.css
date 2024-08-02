@@ -1,0 +1,94 @@
+:root {
+  --deep-purple: #987D9A;
+  --light-purple: #BB9AB1;
+  --soft-beige: #EECEB9;
+  --pale-yellow: #FEFBD8;
+}
+
+
+h1, h2, h3 {
+  color: var(--deep-purple);
+}
+
+.navbar {
+  background-color:linear-gradient(to bottom, #967299, #987D9A);
+}
+
+.nav-link {
+  color: #FEFBD8;
+}
+
+.nav-link:hover {
+  color:#EECEB9;
+}
+
+.section {
+  background-color: var(--pale-yellow);
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+  background-color: var(--soft-beige);
+  color: var(--deep-purple);
+  padding: 10px 0;
+  text-align: center;
+}
+
+body {
+  /* Define a linear gradient background from purple to white */
+  background: linear-gradient(to bottom, #987D9A, #FFFFFF); /* Starting with your deep purple to white */
+  color: #333; /* Sets the default text color */
+  font-family: Arial, sans-serif; /* Example font */
+  min-height: 100vh; /* Ensures the gradient covers the full view height */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+}
+
+
+
+
+.navbar .navbar-brand.top-left-name {
+  font-size: 44px;
+  font-weight: bold;
+  color: #FEFBD8;
+}
+
+#greeting {
+  font-size: 2.5em; /* Large text size */
+  font-weight: bold; /* Bold text */
+  color: #FEFBD8; /* Example color, change as needed */
+  margin-bottom: 20px; /* Spacing below the greeting */
+}
+
+/* Cursor styles */
+#greeting {
+  border-right: 4px solid black;  /* Cursor appearance */
+  padding-right: 5px; /* Space between text and cursor */
+  white-space: nowrap; /* Prevents the text from wrapping */
+  overflow: hidden; /* Keeps the container clean */
+  display: inline-block; /* Keeps the cursor aligned with the text */
+}
+
+/* Blinking animation */
+@keyframes blink {
+  50% {
+      border-color: transparent;
+  }
+}
+#greeting {
+  animation: blink 0.75s step-end infinite;
+}
+
+
+
+@media (min-width: 992px) { /* Adjust based on the breakpoint at which your navbar expands */
+  .nav-link.others{
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+  }
+}
+
