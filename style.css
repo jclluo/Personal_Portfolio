@@ -201,6 +201,14 @@ html, body {
 }
 
 
+.highlight-img {
+  width: 300px;  /* Specify the width */
+  height: 300px; /* Specify the height */
+  object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
+  display: block;  /* Ensures images are block-level elements */
+  margin: auto;    /* Centers the image if the parent container is larger */
+}
+
 @keyframes blink-animation {
   from { border-right-color: black; }
   to { border-right-color: transparent; }
