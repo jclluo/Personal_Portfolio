@@ -1,5 +1,5 @@
-const initialGreetings = ["Driven by data, inspired by results!", "Aspiring Data Scientist ready to innovate.", "Decoding complexity with advanced analytics."];
-const personalStatements = ["a coder.", "a data enthusiast.", "a team player."]; // Statements continued after "I am"
+const initialGreetings = ["Driven by data, inspired by results", "Aspiring Data Scientist ready to innovate.", "Decoding complexity with advanced analytics."];
+const personalStatements = ["a coder", "a data enthusiast", "a team player"]; // Statements continued after "I am"
 const finalMessage = "Welcome to my portfolio"; // The final message to display
 
 let currentPhase = 0;  // 0 for initial greetings, 1 for personal statements, 2 for final message
@@ -9,7 +9,7 @@ let isDeleting = false;
 
 const greetingElement = document.getElementById('greeting');
 const typingSpeed = 30;
-const erasingSpeed = 25;
+const erasingSpeed = 15;
 const pauseBetweenGreetings = 1500;
 const pauseBeforeStatements = 2500;
 
@@ -46,7 +46,7 @@ function typeGreeting() {
         } else if (currentPhase === 1) {
             // Type personal statements
             if (charIndex === 0) {
-                greetingElement.innerHTML = "I am "; // Start each statement with "I am"
+                greetingElement.innerHTML = ""; // Start each statement with "I am"
             }
             if (charIndex < personalStatements[greetingIndex].length) {
                 greetingElement.innerHTML += personalStatements[greetingIndex].charAt(charIndex);
