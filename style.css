@@ -171,6 +171,9 @@ html, body {
   height: 420px; 
 }
 
+.row_work{
+  padding-top: 10%
+}
 
 .work-image img:hover {
   transform: scale(1.05); /* Scale effect */
@@ -233,6 +236,36 @@ html, body {
   display: block;  /* Ensures images are block-level elements */
   margin: auto;    /* Centers the image if the parent container is larger */
 }
+
+.footer {
+  text-align: center; 
+  padding: 20px 0; 
+  background-color: #bfb3db; 
+  color: #fff; 
+  margin-top: 10%;
+  padding-top: 80px;
+}
+
+.footer a {
+  color: #fff; 
+  margin: 0 40px; 
+
+}
+
+.footer i {
+  font-size: 54px; 
+  transition: transform 0.3s ease; 
+}
+
+.footer a:hover i {
+  transform: scale(1.2); /* Slightly enlarge icons on hover */
+}
+
+.final-name{
+  font-size: 150px;
+  margin-top: 3%;
+}
+
 
 @keyframes blink-animation {
   from { border-right-color: black; }
