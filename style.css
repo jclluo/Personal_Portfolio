@@ -130,8 +130,9 @@ html, body {
 }
 
 .mywork_title{
-  -webkit-text-stroke: 3px #FEFBD8; 
-  color: transparent;
+  /* -webkit-text-stroke: 3px #FEFBD8; 
+  color: transparent; */
+  color: #fefbd88f;
   font-size: 18em;
   text-align: left;
   margin-top: 17%;
@@ -139,8 +140,9 @@ html, body {
 }
 
 .mywork_title_1{
-  -webkit-text-stroke: 3px #FEFBD8; 
-  color: transparent;
+  /* -webkit-text-stroke: 3px #FEFBD8; 
+  color: transparent; */
+  color: #fefbd88f;
   font-size: 18em;
   text-align: left;
 }
