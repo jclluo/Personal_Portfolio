@@ -88,6 +88,9 @@ $(document).ready(function() {
     });
 });
 
+
+
+
 // document.addEventListener('DOMContentLoaded', function() {
 //     const sections = document.querySelectorAll('section');
 //     const titles = document.querySelectorAll('.background-title');

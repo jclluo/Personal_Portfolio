@@ -129,15 +129,38 @@ html, body {
   transform: scale(1.1); /* Scales up the image slightly on hover */
 }
 
+.mywork_title{
+  -webkit-text-stroke: 3px #FEFBD8; 
+  color: transparent;
+  font-size: 18em;
+  text-align: left;
+  margin-top: 17%;
+  margin-bottom: -60px;
+}
+
+.mywork_title_1{
+  -webkit-text-stroke: 3px #FEFBD8; 
+  color: transparent;
+  font-size: 18em;
+  text-align: left;
+}
+
+.work-heading {
+  font-size: 2.2rem; 
+  color: #806A8A;
+  margin-bottom: 10px; /* Space between the heading and paragraph */
+  font-weight: bold;
+}
 
 .work-description {
   display: flex;
-  align-items: center;
+  flex-direction: column; /* Stack items vertically */
+  align-items: start; /* Align items to the start of the flex container */
   justify-content: center;
   padding: 10px;
-  font-size: 26px; /* Example font size, adjust as needed */
-  color: #FEFBD8; /* Dark gray text color for better readability */
+  color: var(--pale-yellow); /* Use the color variable for consistency */
 }
+
 
 .work-image img {
   transition: transform 0.3s ease-in-out;
@@ -248,5 +271,10 @@ html, body {
 @media (min-width: 1200px) { /* Adjust this breakpoint as needed */
   .container {
       max-width: 1400px; /* Or any other width that suits your design */
+  }
+}
+@media (max-width: 768px) {
+  .mywork_title {
+    text-align: left;  /* Aligns text to the left on small screens */
   }
 }
