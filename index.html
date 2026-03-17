@@ -1,284 +1,584 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <title>Chris Luo's Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <meta charset="utf-8">
+    <title>Chris Luo | Economic Data Scientist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    colors: {
+                        background: '#FEFBD8', /* Pale Yellow */
+                        card: '#FFFFFF',
+                        primary: '#987D9A',    /* Deep Purple */
+                        primaryLight: '#BB9AB1', /* Light Purple */
+                        dark: '#2C3E50',       /* Primary Dark */
+                        darkLight: '#34495E',  /* Primary Light */
+                        accent: '#E74C3C',     /* Accent Red */
+                        beige: '#EECEB9',      /* Soft Beige */
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                    }
+                }
+            }
+        }
+    </script>
 
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/30f228d396.js" crossorigin="anonymous"></script>
 
+    <!-- Tailwind Configured Style Block -->
+    <style type="text/tailwindcss">
+        @layer components {
+            .bento-card {
+                @apply bg-card rounded-3xl border border-dark/10 shadow-sm transition-all duration-300 relative overflow-hidden;
+            }
+            .bento-card:hover {
+                @apply -translate-y-1 shadow-lg border-primary/30;
+            }
+            .pill-tag {
+                @apply border border-dark/30 rounded-full px-3 py-1.5 text-xs font-medium inline-block m-1 text-dark bg-transparent transition-all duration-200 hover:border-dark;
+            }
+            .pill-tag.primary {
+                @apply bg-primary text-background border-primary hover:bg-primaryLight hover:border-primaryLight;
+            }
+            .pill-tag.accent {
+                @apply text-accent border-accent hover:bg-accent hover:text-background;
+            }
+        }
+    </style>
+
+    <script>
+        // Force default to Light Mode (white background) unless user explicitly toggles to dark
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
+    <style>
+        body {
+            background: #FFFFFF;
+            color: #2C3E50;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        html.dark body {
+            background: linear-gradient(to bottom, #2C3E50, #34495E);
+            background-attachment: fixed;
+            color: #ECF0F1;
+        }
+        
+        .timeline-line {
+            position: relative;
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            background-color: rgba(44, 62, 80, 0.2);
+            z-index: 1;
+        }
+        .timeline-dot {
+            position: relative;
+            z-index: 2;
+            background: #FFFFFF;
+            padding-right: 10px;
+        }
+
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #BB9AB1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #987D9A; }
+    </style>
 </head>
-<body>
-    <!-- NAV -->
-    <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand top-left-name" href="#">Chris Luo</a>
-    
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
-            <!-- Centered links -->
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link others" href="#about">About Me <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link others" href="#myworks">My Works</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link others" href="#experience">Experience</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link others" href="#education">Education</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link others" href="#skills">Skills</a>
-                </li>
-            </ul>
-        </div>
-    
-        <a class="nav-link position-absolute end-0" href="resume.pdf" style="right: 10px;">resume</a>
-    </nav>
-    
-    <!-- <div class="background-title" id="bg-about">About Me</div> -->
-    
+<body class="antialiased pb-20">
 
-    <!-- Intro -->
-    <section id="about" class="container mt-5">
-        <h1 id="greeting" class="text-center blinking-cursor"></h1> 
-
-    </section>
-
-
-    <!-- My Works -->
-    <!-- <div class="background-title" id="bg-myworks">My Works</div> -->
-    <h1 class="mywork_title_1"> My Projects</h1>
-
-    <section id="myworks" class="ccontainer-fluid mt-5">
-
-        <div class="container mt-8">
-            <!-- First Row -->
-            <div class="row row_work">
-                <div class="col-md-7 work-image">
-                    <img src="images/Console War.png" class="img-fluid" alt="Console War" data-toggle="modal" data-target="#imageModal" data-link="https://galnnt.github.io/history-of-gaming-consoles/">
-                </div>
-                <div class="col-md-5 work-description">
-                    <h3 class="work-heading">Console War: An Interactive timeline of Gaming Console</h3>
-                    <p class='work_des'>A svelte based interactive website depicting the evolution of gaming consoles.</p>
-                </div>
-            </div>
-            <!-- Second Row -->
-            <div class="row row_work">
-                <div class="col-md-7 work-description ">
-                    <h3 class="work-heading">League of Legend Champion Ezreal's contribution to game winning in professional scene</h3>
-                    <p class='work_des'>An statiscial report of EZreal's impact on winning in League of Legend professional scene.</p>
-                </div>
-                <div class="col-md-5 work-image">
-                    <img src="images/EZreal.png" class="img-fluid" alt="EZreal" data-toggle="modal" data-target="#imageModal" data-link="https://jclluo.github.io/LoL_Ezreal_Eff2023/">
-                </div>
-            </div>
-            <!-- Repeat for each pair -->
-            <div class="row row_work">
-                <div class="col-md-7 work-image">
-                    <img src="images/Rift Mystery.png" class="img-fluid" alt="Rift Mystery" data-toggle="modal" data-target="#imageModal" data-link="https://jclluo.github.io/Esports-DragonSoul-Analysis/">
-                </div>
-                <div class="col-md-5 work-description">
-                    <h3 class="work-heading">League of Legend Analytics</h3>
-                    <p class='work_des'>An analysis and machine learning model for picking the most crucial elements that lead to victory in League of Legend.</p>
-                </div>
-            </div>
-            <div class="row row_work">
-                <div class="col-md-5 work-description">
-                    <h3 class="work-heading">SD Transit Map</h3>
-                    <p class='work_des'>An interactive map of bus stations in San Diego including filters for accessibility options and organizations.</p>
-                </div>
-                <div class="col-md-7 work-image">
-                    <img src="images/Wheelchair.png" class="img-fluid" alt="Wheelchair" data-toggle="modal" data-target="#imageModal" data-link="https://galnnt.github.io/sd-transport-visual/">
-                </div>
-            </div>
-            <div class="row row_work">
-                <div class="col-md-7 work-image">
-                    <img src="images/Todo.png" class="img-fluid" alt="Todo List Application" data-toggle="modal" data-target="#imageModal" data-link="https://github.com/jclluo/To_DO_List">
-                </div>
-                <div class="col-md-5 work-description">
-                    <h3 class="work-heading">Interactive TO-DO List</h3>
-                    <p class='work_des'>A project based interactive TO-DO list with an interactive chart using sveltkit.</p>
-                </div>
-            </div>
-            <div class="row row_work">
-                <div class="col-md-5 work-description">
-                    <h3 class="work-heading">Boston Bike Stations Timely Hot Map</h3>
-                    <p class='work_des'>An interactive map showing the daily activity of bike stations in Boston created using svelet and mapbox.</p>
-                </div>
-                <div class="col-md-7 work-image">
-                    <img src="images/bike.png" class="img-fluid" alt="Bicycle" data-toggle="modal" data-target="#imageModal" data-link="https://example.com/console-war">
-                </div>
-            </div>
-        </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         
-    
-        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true" >
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="imageModalLabel"></h5>
+        <!-- HEADER / BRANDING GRAPHIC -->
+        <header class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 items-stretch h-auto lg:min-h-[420px]">
+            <!-- Left Big Bento Block -->
+            <div class="col-span-1 lg:col-span-2 bg-dark rounded-4xl relative overflow-hidden flex flex-col justify-between p-8 md:p-12 text-background shadow-lg group border border-dark/10 dark:border-white/10 h-full">
+                <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#FEFBD8 2px, transparent 2px); background-size: 24px 24px;"></div>
+                
+                <svg class="absolute bottom-[-5%] right-[-5%] w-full h-3/4 opacity-20 text-accent transition-transform duration-700 group-hover:scale-105 group-hover:opacity-30" viewBox="0 0 200 100" preserveAspectRatio="none">
+                    <path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M0 80 C 30 80, 40 30, 70 45 S 100 90, 130 50 S 160 10, 200 20"/>
+                    <circle cx="70" cy="45" r="3" fill="currentColor"/>
+                    <circle cx="130" cy="50" r="3" fill="currentColor"/>
+                    <circle cx="200" cy="20" r="3" fill="currentColor"/>
+                </svg>
 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                <div class="relative z-10 flex items-center gap-3 mb-6">
+                    <span class="w-2.5 h-2.5 rounded-full bg-accent animate-pulse"></span>
+                    <span class="font-mono text-primaryLight text-xs md:text-sm uppercase tracking-widest">Portfolio 2026</span>
+                </div>
+
+                <div class="relative z-10">
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[1.05] mb-4">
+                        QUANTIFYING<br>
+                        <span class="text-primaryLight font-serif italic tracking-normal font-semibold pr-2">the</span>ABSTRACT
+                    </h1>
+                </div>
+
+                <div class="relative z-10 flex flex-wrap gap-6 mt-8 md:mt-12">
+                    <div>
+                        <div class="text-3xl md:text-4xl font-bold text-background">4.5k+</div>
+                        <div class="text-[10px] md:text-xs text-primaryLight font-mono uppercase mt-1">Records Normalized</div>
                     </div>
-                    <div class="modal-body">
-                        <img src="" id="modalImage" class="img-fluid" alt="Detailed View">
-                        <a href="#" id="imageLink" class="fa-brands fa-github" target="_blank">View More</a>
+                    <div class="hidden md:block w-px bg-darkLight"></div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-bold text-background">3+</div>
+                        <div class="text-[10px] md:text-xs text-primaryLight font-mono uppercase mt-1">Years Analytics Exp</div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-
-    <!-- Experience-->
-    <h1 class="mywork_title">Experience</h1>
-    <section id="experience" class="container mt-5 ">
-
-        <h2 class="experience_title">Data Analyst for the UC San Diego Economics Research lab.</h2>
-        <div class="row text-center">
-            <div class="col-md-4">
-                <img src="images/visualization.png" class="img-fluid highlight-img" alt="Highlight 1" data-toggle="modal" data-target="#experienceModal" data-src="images/visualization.png" data-description="Visualized thousands of complex dataset">
-                <p class="highlight-desc">Visualized thousands of complex datasets</p>
+            
+            <!-- Right Column Stack (Fixed Height Sync) -->
+            <div class="col-span-1 flex flex-col gap-6 h-full">
+                <div class="bg-primary rounded-4xl p-8 flex-1 flex flex-col justify-between text-background relative overflow-hidden shadow-sm transition-transform hover:-translate-y-1">
+                    <i class="fa-solid fa-server text-4xl opacity-80 mb-4 text-background"></i>
+                    <div>
+                        <h3 class="text-2xl font-bold leading-tight mb-2">Systems &<br>Pipelines</h3>
+                        <p class="text-sm opacity-90 font-medium text-beige">Building scalable architecture for economic insights.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-card rounded-4xl p-6 flex-1 flex flex-col justify-center border border-dark/10 shadow-sm transition-transform hover:-translate-y-1">
+                    <div class="text-[10px] font-bold text-dark/50 uppercase tracking-wider mb-4 px-1">Core Competencies</div>
+                    <div class="flex flex-wrap">
+                        <span class="pill-tag primary">#Econometrics</span>
+                        <span class="pill-tag">#Machine_Learning</span>
+                        <span class="pill-tag">#Python</span>
+                        <span class="pill-tag accent">#Data_Viz</span>
+                        <span class="pill-tag">#SQL</span>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-                <img src="images/gathered.png" class="img-fluid highlight-img" alt="Highlight 2" data-toggle="modal" data-target="#experienceModal" data-src="images/gathered.png" data-description="Actively scraped gigabytes of useful data">
-                <p class="highlight-desc">Actively scraped gigabytes of useful data</p>
+        </header>
+
+        <!-- STICKY NAVBAR -->
+        <nav class="sticky top-4 z-50 bg-white/90 dark:bg-dark/90 backdrop-blur-md border border-dark/10 dark:border-white/10 py-3 mb-10 flex justify-between items-center rounded-2xl px-6 shadow-sm transition-colors duration-300">
+            <div class="flex space-x-6">
+                <a href="#about" class="font-semibold text-dark dark:text-gray-100 hover:text-accent dark:hover:text-accent transition">About me</a>
+                <a href="#resume" class="font-semibold text-dark dark:text-gray-100 hover:text-accent dark:hover:text-accent transition">Resume</a>
+                <a href="#work" class="font-semibold text-dark dark:text-gray-100 hover:text-accent dark:hover:text-accent transition">Work</a>
             </div>
-            <div class="col-md-4">
-                <img src="images/teamwork.png" class="img-fluid highlight-img" alt="Highlight 3" data-toggle="modal" data-target="#experienceModal" data-src="images/teamwork.png" data-description="Collaborated to clean and analyze the data">
-                <p class="highlight-desc">Collaborated to clean and analyze the data</p>
+            <div class="flex space-x-3 items-center">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="w-10 h-10 rounded-full border border-dark dark:border-gray-100 flex items-center justify-center text-dark dark:text-gray-100 hover:bg-dark hover:text-white dark:hover:bg-gray-100 dark:hover:text-dark transition">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block"></i>
+                </button>
+                <a href="resume.pdf" target="_blank" class="w-10 h-10 rounded-full border border-dark dark:border-gray-100 flex items-center justify-center text-dark dark:text-gray-100 hover:bg-dark hover:text-white dark:hover:bg-gray-100 dark:hover:text-dark transition"><i class="fa-solid fa-file-pdf"></i></a>
+                <a href="https://github.com/jclluo" target="_blank" class="w-10 h-10 rounded-full border border-dark dark:border-gray-100 flex items-center justify-center text-dark dark:text-gray-100 hover:bg-dark hover:text-white dark:hover:bg-gray-100 dark:hover:text-dark transition"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </nav>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16 items-stretch">
+            
+            <!-- Identity Block (Replaces Photo) -->
+            <div class="lg:col-span-5 bento-card bg-dark text-background p-10 flex flex-col justify-between border border-dark/10 dark:border-white/10 relative overflow-hidden group h-full">
+                <!-- Abstract geometry instead of photo -->
+                <div class="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+                    <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="49" stroke="#EECEB9" stroke-width="2" stroke-dasharray="8 8"/>
+                        <circle cx="50" cy="50" r="35" stroke="#BB9AB1" stroke-width="1"/>
+                        <path d="M50 10 L50 90 M10 50 L90 50" stroke="#E74C3C" stroke-width="1" stroke-dasharray="4 4"/>
+                    </svg>
+                </div>
+                
+                <div>
+                    <p class="font-mono text-accent text-sm mb-4">> whoami</p>
+                    <h1 class="text-5xl lg:text-6xl font-black leading-tight mb-4 text-card">Chris<br>Luo</h1>
+                    <div class="w-12 h-1 bg-primaryLight mb-6"></div>
+                </div>
+                
+                <div class="mt-8">
+                    <p class="font-mono text-beige text-sm leading-relaxed">
+                        [ Economic Data Scientist ]<br>
+                        [ B.S. Math & Economics ]<br>
+                        [ UC San Diego '25 ]
+                    </p>
+                </div>
+            </div>
+
+            <!-- Intro & Contact -->
+            <div class="lg:col-span-7 flex flex-col gap-6 h-full">
+                <!-- Executive Summary -->
+                <div class="bento-card p-10 flex-1 relative overflow-hidden flex flex-col justify-center">
+                    <!-- Clean FontAwesome watermark instead of text bug -->
+                    <i class="fa-solid fa-quote-left absolute -top-4 -left-2 text-[8rem] text-dark opacity-5"></i>
+                    
+                    <div class="relative z-10">
+                        <h2 class="text-3xl font-bold mb-6 text-dark tracking-tight leading-tight">Bridging Statistical Theory & Practical Architecture.</h2>
+                        <p class="text-darkLight text-lg leading-relaxed font-light mb-6">
+                            My academic background boasts a rigorous foundation in Mathematics and Economics, but my passion lies in applied data science. I specialize in crafting analytical pipelines that are statistically sound and functionally deployed to solve complex, systemic economic problems.
+                        </p>
+                        <a href="#work" class="inline-flex items-center gap-2 text-primary font-bold hover:text-accent transition">
+                            View my methodology <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Grid (Removed fixed height to prevent mobile wrapping bugs) -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <a href="mailto:jclluo@gmail.com" class="bento-card bg-accent text-background p-6 flex flex-col justify-center items-center hover:opacity-90 border-transparent text-center min-h-[120px]">
+                        <i class="fa-solid fa-envelope text-2xl mb-3"></i>
+                        <span class="font-mono text-xs">Email Me</span>
+                    </a>
+                    <a href="#" class="bento-card bg-primary text-background p-6 flex flex-col justify-center items-center hover:bg-primaryLight border-transparent text-center min-h-[120px]">
+                        <i class="fa-brands fa-linkedin text-2xl mb-3"></i>
+                        <span class="font-mono text-xs">LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/jclluo" class="bento-card bg-card p-6 flex flex-col justify-center items-center hover:border-dark text-dark text-center min-h-[120px]">
+                        <i class="fa-brands fa-github text-2xl mb-3"></i>
+                        <span class="font-mono text-xs">GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESUME SECTION -->
+        <section id="resume" class="mb-20">
+            <div class="flex justify-between items-end mb-8 border-b border-dark/20 dark:border-white/20 pb-2 px-2 transition-colors duration-300">
+                <h2 class="text-4xl font-black tracking-tight text-dark dark:text-white transition-colors duration-300">Professional Overview</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Left Column: Experience -->
+                <div class="lg:col-span-7 flex flex-col gap-6 h-full">
+                    <h3 class="font-serif text-2xl text-primary dark:text-primaryLight italic mb-2 px-2 transition-colors duration-300">Experience</h3>
+                    
+                    <!-- Exp 1 -->
+                    <div class="bento-card p-8 relative overflow-hidden border-l-4 border-l-primary">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
+                            <h4 class="font-bold text-xl text-dark">Data Analyst</h4>
+                            <span class="font-mono text-sm text-primaryLight bg-primary/10 px-3 py-1 rounded-full whitespace-nowrap">2023 - Present</span>
+                        </div>
+                        <p class="text-sm text-accent font-semibold mb-4 uppercase tracking-wider">UC San Diego Economics Research Lab</p>
+                        <ul class="text-darkLight text-sm space-y-2 font-light list-disc list-inside">
+                            <li>Engineered web-scraping pipelines for unstructured data.</li>
+                            <li>Applied econometric models and Naive Bayes classifiers to track systemic biases.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Exp 2 -->
+                    <div class="bento-card p-8 relative overflow-hidden border-l-4 border-l-darkLight">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
+                            <h4 class="font-bold text-xl text-dark">Instructional Assistant</h4>
+                            <span class="font-mono text-sm text-darkLight bg-dark/5 px-3 py-1 rounded-full whitespace-nowrap">2024 - Present</span>
+                        </div>
+                        <p class="text-sm text-dark font-semibold mb-4 uppercase tracking-wider">UC San Diego Economics Department</p>
+                        <p class="text-darkLight text-sm leading-relaxed font-light">
+                            Clarified complex mathematical and econometrics concepts for undergraduate students, actively diagnosing and resolving logical blocks in quantitative analysis.
+                        </p>
+                    </div>
+
+                    <!-- Exp 3 -->
+                    <div class="bento-card p-8 relative overflow-hidden border-l-4 border-l-beige">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
+                            <h4 class="font-bold text-xl text-dark">Data Analyst Intern</h4>
+                            <span class="font-mono text-sm text-darkLight bg-dark/5 px-3 py-1 rounded-full whitespace-nowrap">Spring 2025</span>
+                        </div>
+                        <p class="text-sm text-dark font-semibold mb-4 uppercase tracking-wider">Shanghai Agrobiological Gene Center</p>
+                        <p class="text-darkLight text-sm leading-relaxed font-light">
+                            Digitized unstructured agricultural records into relational datasets. Generated statistical distribution models, including tiller-count histograms, utilizing R.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Education & Skills -->
+                <div class="lg:col-span-5 flex flex-col gap-6 h-full">
+                    <h3 class="font-serif text-2xl text-primary dark:text-primaryLight italic mb-2 px-2 transition-colors duration-300">Education & Skills</h3>
+                    
+                    <!-- Education Bento -->
+                    <div class="bento-card bg-dark text-background p-8 border border-dark/10 dark:border-white/10 flex flex-col justify-center transition-colors duration-300">
+                        <div class="mb-8">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-xl text-card">B.S. Math & Economics</h4>
+                                <i class="fa-solid fa-graduation-cap text-beige text-2xl"></i>
+                            </div>
+                            <p class="text-sm text-primaryLight font-mono mb-2">UC San Diego | 2021-2025</p>
+                            <span class="text-xs bg-accent text-background px-2 py-1 rounded">Provost Honors</span>
+                        </div>
+                        <div class="w-full h-px bg-darkLight mb-8"></div>
+                        <div>
+                            <h4 class="font-bold text-lg text-card mb-1">Minor in Data Science</h4>
+                            <p class="text-sm text-beige font-light">Focus on Machine Learning, Data Structures, and Predictive Modeling.</p>
+                        </div>
+                    </div>
+
+                    <!-- Skills Bento (Large Pill Cloud) -->
+                    <div class="bento-card p-8 flex-1 flex flex-col justify-center">
+                        <div class="text-xs font-bold text-dark/40 uppercase tracking-widest mb-6 border-b border-dark/10 pb-2">Technical Arsenal</div>
+                        <div class="flex flex-wrap">
+                            <span class="pill-tag primary text-[15px] px-4 py-2">Python</span>
+                            <span class="pill-tag text-[15px] px-4 py-2">R Studio</span>
+                            <span class="pill-tag text-[15px] px-4 py-2">SQL</span>
+                            <span class="pill-tag text-[15px] px-4 py-2">Stata</span>
+                            <span class="pill-tag text-[15px] px-4 py-2">Pandas</span>
+                            <span class="pill-tag text-[15px] px-4 py-2">Scikit-Learn</span>
+                            <span class="pill-tag text-[15px] px-4 py-2">Tableau</span>
+                            <span class="pill-tag accent text-[15px] px-4 py-2">Svelte</span>
+                            <span class="pill-tag text-[15px] px-4 py-2">C++ / Java</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- WORK (PROJECTS) SECTION -->
+        <section id="work" class="mb-16">
+            <div class="flex justify-between items-end mb-8 border-b border-dark/20 dark:border-white/20 pb-2 px-2 transition-colors duration-300">
+                <h2 class="text-4xl font-black tracking-tight text-dark dark:text-white transition-colors duration-300">Selected Work</h2>
+                <a href="https://github.com/jclluo" target="_blank" class="flex items-center gap-2 text-sm font-bold text-dark dark:text-gray-100 hover:text-accent dark:hover:text-accent transition">See More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Project: NBA Engine -->
+                <div class="bento-card project-card flex flex-col cursor-pointer group" onclick="openModal('NBA Player-Comp Engine', 'images/NBA.png', 'Normalized 4,500+ records via API. Applied unsupervised K-Means clustering (k=4 via Elbow Method) to categorize players. Serverless dashboard using Svelte.', 'https://jclluo.github.io/player-deep-dive/')">
+                    <div class="h-48 overflow-hidden rounded-t-3xl bg-dark/5 flex items-center justify-center">
+                        <img src="images/NBA.png" onerror="this.src='https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=800&auto=format&fit=crop'" class="w-full h-full object-cover transform group-hover:scale-110 group-hover:-rotate-2 transition-all duration-700 ease-out grayscale group-hover:grayscale-0" alt="NBA Engine">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-primary mb-2 block">Machine Learning • Svelte</span>
+                            <h3 class="font-bold text-lg leading-tight mb-2 text-dark">NBA Player-Comp Engine</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project: Gender Discrimination -->
+                <div class="bento-card project-card flex flex-col cursor-pointer group" onclick="openModal('Gender Discrimination Analysis', 'images/Gender.png', 'Scraped roster data from top 30 U.S. Econ Ph.D. programs. Developed a Naive Bayes classifier utilizing NLTK and gender-guesser to test representation biases.', 'https://jclluo.github.io/ECON_PHD_Gender_Inequality_Analysis/')">
+                    <div class="h-48 overflow-hidden rounded-t-3xl bg-dark/5 flex items-center justify-center">
+                        <img src="images/Gender.png" onerror="this.src='https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop'" class="w-full h-full object-cover transform group-hover:scale-110 group-hover:rotate-2 transition-all duration-700 ease-out grayscale group-hover:grayscale-0" alt="Gender Data">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-primary mb-2 block">Python • NLP • Stata</span>
+                            <h3 class="font-bold text-lg leading-tight mb-2 text-dark">Gender Discrimination Analysis</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project: Console War -->
+                <div class="bento-card project-card flex flex-col cursor-pointer group" onclick="openModal('Console War Timeline', 'images/Console War.png', 'A Svelte based interactive website depicting the evolution of gaming consoles.', 'https://galnnt.github.io/history-of-gaming-consoles/')">
+                    <div class="h-48 overflow-hidden rounded-t-3xl bg-beige flex items-center justify-center">
+                        <img src="images/Console War.png" onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop'" class="w-full h-full object-cover transform group-hover:scale-110 group-hover:-rotate-2 transition-all duration-700 ease-out grayscale group-hover:grayscale-0" alt="Console War">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-darkLight mb-2 block">Data Viz • Svelte</span>
+                            <h3 class="font-bold text-lg leading-tight mb-2 text-dark">Console War Timeline</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project: Transit Map -->
+                <div class="bento-card project-card flex flex-col cursor-pointer group" onclick="openModal('SD Transit Map', 'images/Wheelchair.png', 'An interactive map of bus stations in San Diego including filters for accessibility options.', 'https://galnnt.github.io/sd-transport-visual/')">
+                    <div class="h-48 overflow-hidden rounded-t-3xl bg-beige flex items-center justify-center">
+                        <img src="images/Wheelchair.png" onerror="this.src='https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=800&auto=format&fit=crop'" class="w-full h-full object-cover transform group-hover:scale-110 group-hover:rotate-2 transition-all duration-700 ease-out grayscale group-hover:grayscale-0" alt="Transit Map">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-darkLight mb-2 block">Spatial • Filtering</span>
+                            <h3 class="font-bold text-lg leading-tight mb-2 text-dark">SD Transit Map</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project: League Ezreal -->
+                <div class="bento-card project-card flex flex-col cursor-pointer group" onclick="openModal('League of Legends: Ezreal', 'images/EZreal.png', 'A statistical report of Ezreals impact on winning in the League of Legends professional scene.', 'https://jclluo.github.io/LoL_Ezreal_Eff2023/')">
+                    <div class="h-48 overflow-hidden rounded-t-3xl bg-beige flex items-center justify-center">
+                        <img src="images/EZreal.png" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop'" class="w-full h-full object-cover transform group-hover:scale-110 group-hover:-rotate-2 transition-all duration-700 ease-out grayscale group-hover:grayscale-0" alt="Ezreal">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-darkLight mb-2 block">Statistics • Esports</span>
+                            <h3 class="font-bold text-lg leading-tight mb-2 text-dark">Ezreal Win-Impact</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project: Rift Mystery -->
+                <div class="bento-card project-card flex flex-col cursor-pointer group" onclick="openModal('League Analytics', 'images/Rift Mystery.png', 'Analysis and machine learning model for picking the most crucial elements that lead to victory in League of Legends.', 'https://jclluo.github.io/Esports-DragonSoul-Analysis/')">
+                    <div class="h-48 overflow-hidden rounded-t-3xl bg-beige flex items-center justify-center">
+                        <img src="images/Rift Mystery.png" onerror="this.src='https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=800&auto=format&fit=crop'" class="w-full h-full object-cover transform group-hover:scale-110 group-hover:rotate-2 transition-all duration-700 ease-out grayscale group-hover:grayscale-0" alt="Rift Mystery">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-darkLight mb-2 block">Analytics • ML</span>
+                            <h3 class="font-bold text-lg leading-tight mb-2 text-dark">Rift Mystery</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project: TO-DO List -->
+                <div class="bento-card project-card flex flex-col cursor-pointer group" onclick="openModal('Interactive TO-DO List', 'images/Todo.png', 'A project based interactive TO-DO list with an interactive chart using SvelteKit.', 'https://github.com/jclluo/To_DO_List')">
+                    <div class="h-48 overflow-hidden rounded-t-3xl bg-beige flex items-center justify-center">
+                        <img src="images/Todo.png" onerror="this.src='https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=800&auto=format&fit=crop'" class="w-full h-full object-cover transform group-hover:scale-110 group-hover:-rotate-2 transition-all duration-700 ease-out grayscale group-hover:grayscale-0" alt="Todo">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-darkLight mb-2 block">App • SvelteKit</span>
+                            <h3 class="font-bold text-lg leading-tight mb-2 text-dark">Interactive TO-DO</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project: Boston Bike -->
+                <div class="bento-card project-card flex flex-col cursor-pointer group" onclick="openModal('Boston Bike Map', 'images/bike.png', 'An interactive map showing the daily activity of bike stations in Boston created using Svelte and Mapbox.', 'https://github.com/jclluo/Bike_Hot_Map')">
+                    <div class="h-48 overflow-hidden rounded-t-3xl bg-beige flex items-center justify-center">
+                        <img src="images/bike.png" onerror="this.src='https://images.unsplash.com/photo-1471506480208-91b3a4cc78be?q=80&w=800&auto=format&fit=crop'" class="w-full h-full object-cover transform group-hover:scale-110 group-hover:rotate-2 transition-all duration-700 ease-out grayscale group-hover:grayscale-0" alt="Bike">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-darkLight mb-2 block">Mapbox • Spatial</span>
+                            <h3 class="font-bold text-lg leading-tight mb-2 text-dark">Boston Bike Map</h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Custom Lightbox Modal -->
+    <div id="projectModal" class="fixed inset-0 z-[100] bg-dark/90 backdrop-blur-sm hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-card rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 border border-dark/20" id="modalContent">
+            <div class="relative h-64 sm:h-96 bg-beige">
+                <img id="modalImg" src="" alt="Project Image" class="w-full h-full object-cover mix-blend-multiply opacity-90">
+                <button onclick="closeModal()" class="absolute top-4 right-4 bg-card/80 hover:bg-card text-dark w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-8">
+                <h2 id="modalTitle" class="text-3xl font-bold mb-4 text-dark"></h2>
+                <p id="modalDesc" class="text-darkLight mb-6 leading-relaxed"></p>
+                <a id="modalLink" href="#" target="_blank" class="inline-flex items-center gap-2 bg-dark text-background px-6 py-3 rounded-full font-medium hover:bg-primary transition">
+                    View Project <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                </a>
             </div>
         </div>
-
-    </section>
-    
-
-
-
-    <!-- Education -->
-    <!-- <div class="background-title" id="bg-education">Education</div> -->
-    <h1 class="mywork_title">Education</h1>
-    <section id="education" class="container mt-5">
-        <h2 class="text-center mb-4 education_title"></h2>
-        <div>
-            <h3>Bachelor of Science in Mathematics and Economics with high distinction</h3>
-            <p>University of California San Diego, 2021-2025</p>
-            <ul>
-                <li>Coursework included economics applications, econometrics, mathematical models, and statistics.</li>
-            </ul>
-        </div>
-        <div>
-            <h3>Minor Degree in Data Science</h3>
-            <p>University of California San Diego, 2021-2025</p>
-            <ul>
-                <li>Coursework included data analysis, data structure, machine learning, and coding with various languages (Python, Java, etc.)</li>
-            </ul>
-        </div>
-    </section>
-    
-
-
-    <!-- Skills -->
-    <!-- <div class="background-title" id="bg-skills">Skills</div> -->
-    <h1 class="mywork_title">Skills</h1>
-    <section id="skills" class="container mt-5">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <span class="skill-rating">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                </span> Python
-            </li>
-            <li class="list-group-item">
-                <span class="skill-rating">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                </span> Java
-            </li>
-            <li class="list-group-item">
-                <span class="skill-rating">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                </span> Data Analysis
-            </li>
-            <!-- New skills -->
-            <li class="list-group-item">
-                <span class="skill-rating">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                </span> Data Visualization
-            </li>
-            <li class="list-group-item">
-                <span class="skill-rating">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                </span> Machine Learning
-            </li>
-            <li class="list-group-item">
-                <span class="skill-rating">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                </span> R-Studio
-            </li>
-            <li class="list-group-item">
-                <span class="skill-rating">
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                </span> Excel
-            </li>
-        </ul>
-        
-    </section>
-    
-
-
+    </div>
 
     <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://kit.fontawesome.com/30f228d396.js" crossorigin="anonymous"></script>
-  <script src="script.js" charset="utf-8"></script>
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Vanilla JS Modal Logic
+        const modal = document.getElementById('projectModal');
+        const modalContent = document.getElementById('modalContent');
+        
+        function openModal(title, imgSrc, desc, link) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalImg').src = imgSrc;
+            document.getElementById('modalDesc').textContent = desc;
+            
+            const linkBtn = document.getElementById('modalLink');
+            if(link && link !== '#') {
+                linkBtn.href = link;
+                linkBtn.style.display = 'inline-flex';
+            } else {
+                linkBtn.style.display = 'none';
+            }
+
+            modal.classList.remove('hidden');
+            // Trigger reflow
+            void modal.offsetWidth;
+            modal.classList.add('opacity-100');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('opacity-100');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
+
+        // Intersection Observer for Scroll Animations (Staggered Fade-in-up)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-12');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Apply observer and initial invisible states to project cards
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            card.classList.add('opacity-0', 'translate-y-12', 'transition-all', 'duration-[800ms]', 'ease-out');
+            
+            // Create a staggered delay effect based on columns (4 columns max on lg screens)
+            const delay = (index % 4) * 150; 
+            card.style.transitionDelay = `${delay}ms`;
+            
+            observer.observe(card);
+        });
+    </script>
 </body>
-
-
-<footer class="footer">
-    <a href="mailto:email@example.com" title="Send me an email">
-        <i class="fa-solid fa-envelope fa-2xl"></i>
-    </a>
-    <a href="https://github.com/yourusername" target="_blank" title="Visit my GitHub">
-        <i class="fa-brands fa-github fa-2xl"></i>
-    </a>
-    <a href="https://steamcommunity.com/id/yoursteamid" target="_blank" title="Visit my Steam Profile">
-        <i class="fa-brands fa-steam fa-2xl"></i>
-    </a>
-
-    <h1 class="final-name">Chris Luo</h1>
-</footer>
-
 </html>
